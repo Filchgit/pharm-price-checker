@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price_description: 1
+  scrape_date: 2021-02-27
+  price_at_scrape: 1
+  price_reduction_rec_retail_at_scrape: 1
+
+two:
+  name: MyString
+  price_description: 1
+  scrape_date: 2021-02-27
+  price_at_scrape: 1
+  price_reduction_rec_retail_at_scrape: 1
