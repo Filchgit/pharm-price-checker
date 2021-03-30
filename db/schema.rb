@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_045126) do
+ActiveRecord::Schema.define(version: 2021_03_28_062603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 2021_02_27_045126) do
 
   create_table "stock_items", force: :cascade do |t|
     t.string "name"
-    t.integer "price_description"
     t.date "scrape_date"
-    t.integer "price_at_scrape"
     t.integer "price_reduction_rec_retail_at_scrape"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "price_at_scrape"
+    t.string "price_description"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

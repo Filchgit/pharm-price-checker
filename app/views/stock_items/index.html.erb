@@ -1,6 +1,28 @@
+
+<h1>Current Tracked Items</h1>
+
+<h4>Import Stock Items</h4>
+<%= form_tag upload_stock_items_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+<% end %>
+
+
+<% @stock_items.each do |item| %>
+<%= item.name %>
+<% if item.price_at_scrape.to_s.length > 3 %>
+ $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
+<% end %>
+<% if item.price_reduction_rec_retail_at_scrape.to_s.length > 3 %>
+      $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+ <% end %>
+
+  <%= item.scrape_date %>
+<br>
+<% end %> 
+
 <h1>StockItems#index</h1>
 <p>Find me in app/views/stock_items/index.html.erb</p>
-
 
 <h2>So I am doing this work so I can hang out more at places like this with these people</h2>
 <%= cl_image_tag("https://res.cloudinary.com/jomermac-pty-ltd/image/upload/v1614401037/dbb2xygqdfwt97yqbp8k.jpg",
