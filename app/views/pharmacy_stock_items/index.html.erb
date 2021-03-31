@@ -1,0 +1,16 @@
+<h1>PharmacyStockItems#index</h1>
+<p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+
+<% @pharmacy_stock_items.each do |item| %>
+<%= item.name %>
+<% if item.ws1_cost.to_s.length > 2 %>
+ $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+<% end %>
+<% if item.last_invoice_cost.to_s.length > 2 %>
+      $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+ <% end %>
+
+<%= item.apn %>
+<%= item.pde %>
+<br>
+<% end %> 
