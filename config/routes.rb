@@ -7,11 +7,11 @@ Rails.application.routes.draw do
  
   root to: 'stock_items#index'
 
-  resources :stock_items, only: [:index, :create, :new, :edit ] do
+  resources :stock_items, only: [:index, :create, :new, :edit, :update] do
     collection { post :upload }
   end
 
-  resources :pharmacy_stock_items, only: [:index, :create, :new, :edit ] do
+  resources :pharmacy_stock_items, only: [:index, :create, :new, :edit, :update ] do
     collection { post :upload }
   end
 

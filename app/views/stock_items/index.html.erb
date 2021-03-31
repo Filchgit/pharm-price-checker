@@ -10,14 +10,21 @@
 
 <% @stock_items.each do |item| %>
 <%= item.name %>
+<%= item.apn_barcode_1 %>
+<%= item.pde %>
+
 <% if item.price_at_scrape.to_s.length > 3 %>
  $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
 <% end %>
 <% if item.price_reduction_rec_retail_at_scrape.to_s.length > 3 %>
       $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
- <% end %>
+<% end %>
 
   <%= item.scrape_date %>
+  <%= link_to edit_stock_item_path(:id => item.id), method: :get do %>
+  <p> edit this stock item</p>
+
+  <% end %>
 <br>
 <% end %> 
 

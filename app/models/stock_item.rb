@@ -5,7 +5,7 @@ class StockItem < ApplicationRecord
     CSV.foreach(file.path) do |row|
 
       new_stock_item = StockItem.new
-      new_stock_item.name = row[0]      
+      new_stock_item.name = row[0]
       new_stock_item.scrape_date = row[2]
       new_stock_item.price_at_scrape = row[3].to_s.delete('.').to_i
  
@@ -13,6 +13,7 @@ class StockItem < ApplicationRecord
       new_stock_item.save
     end
   end
+
 
 
 end
