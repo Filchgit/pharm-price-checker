@@ -9,7 +9,7 @@ class PharmacyStockItemsController < ApplicationController
 
   def upload
     PharmacyStockItem.upload(params[:file])
-    redirect_to stock_items_index_path
+    redirect_to pharmacy_stock_items_index_path
   end
 
 end
