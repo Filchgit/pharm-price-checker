@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  pharmacy_id: 1
+  apn: 1
+  ws1_cost: 1
+  last_invoice_cost: 1
+
+two:
+  name: MyString
+  pharmacy_id: 1
+  apn: 1
+  ws1_cost: 1
+  last_invoice_cost: 1
