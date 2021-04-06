@@ -3,7 +3,7 @@
 This is a rails application written as a paid project for a fellow pharmacist. It is currently very much in development.
 It relies on data being uploaded from Z pharmacy dispense system on the pharmacist side within the program, and also 
 on scraped data being uploaded by myself from my WebScraper2 program written in C#, though this also happens from within the app,
-as it will constantly be updated. I am using the C# version of webscrapingas I want to keep the actual data scraping off Heroku, 
+as it will constantly be updated. I am using the C# version of webscraping as I want to keep the actual data scraping off Heroku, 
 and be able to scrape from behind my stealth systems like Witopia.
 
 DB still in development; likely to add a whole lot more as time goes on.
