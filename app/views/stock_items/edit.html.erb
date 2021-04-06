@@ -1,7 +1,25 @@
 <h1>y'all came here to edit</h1>
 
 <%  stock_item = @stock_item %> 
+<%= stock_item.name %> <br>
+Last Scrape Date: <%= stock_item.scrape_date %> <br>
+Pde: <%= stock_item.pde %> <br>
+Current APN /barcode: <%=  stock_item.apn_barcode_1 %> <br>
+
+<% if stock_item.price_at_scrape.to_s.length > 3 %>
+ <% retail_price = stock_item.price_at_scrape.to_s.insert(-3,'.') %>
+<% end %>
+Chemist Warehouse Retail Price: $<%= retail_price %> <br>
+
+<% if stock_item.price_reduction_rec_retail_at_scrape.to_s.length > 3 %>
+  <% price_reduction = stock_item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+<% end %>
+Chemist Warehouse Discount off Recommended retail: <%= price_reduction %>
+ <br>
+ <br>
 <%= simple_form_for stock_item do |f| %>
-<%= f.input :apn_barcode_1, label: "apn  / Barcode 1" %>
+<%= f.input :pde, label: "New pde"  %>
+<%= f.input :apn_barcode_1, label: "New apn  / Barcode 1" %>
+
 <%= f.submit %>
 <% end %> 

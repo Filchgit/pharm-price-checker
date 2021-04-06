@@ -28,7 +28,6 @@ class StockItemsController < ApplicationController
   # end
 
   def upload
-
     StockItem.upload(params[:file])
     redirect_to stock_items_index_path
   end
