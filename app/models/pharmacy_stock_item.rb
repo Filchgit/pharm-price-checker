@@ -33,4 +33,7 @@ class PharmacyStockItem < ApplicationRecord
       end
     end
   end
+
+  include PgSearch::Model
+  pg_search_scope :search_by_name_apn, against: [:name, :apn], using: { tsearch: { prefix: true } }
 end

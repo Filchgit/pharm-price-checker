@@ -94,4 +94,8 @@ class StockItem < ApplicationRecord
     end
   end
 
+  include PgSearch::Model
+  pg_search_scope :search_by_name_apn, against: [:name, :apn_barcode_1], using: { tsearch: { prefix: true } }
+
+
 end
