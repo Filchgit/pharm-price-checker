@@ -13,13 +13,21 @@
 <%= item.apn_barcode_1 %>
 <%= item.pde %>
 
-<% if item.price_at_scrape.to_s.length > 3 %>
+<% if item.price_at_scrape.to_s.length >= 3 %>
  $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
 <% end %>
-<% if item.price_reduction_rec_retail_at_scrape.to_s.length > 3 %>
-      $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
-<% end %>
 
+<% case item.price_reduction_rec_retail_at_scrape.to_s.length %>
+<% when 2 %>
+  $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
+<% when 1 %>
+ $<% item.price_reduction_rec_retail_at_scrape.to_s %> 
+<% else %>
+ $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+<% end %> 
+
+
+Item price description: <%= item.price_description %>
   <%= item.scrape_date %>
   <%= link_to edit_stock_item_path(:id => item.id), method: :get do %>
   <p> edit this stock item</p>

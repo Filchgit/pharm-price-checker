@@ -1,7 +1,8 @@
 class StockItemsController < ApplicationController
 
   def index
-    @stock_items = StockItem.all
+    @stock_items = StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape
+    @stock_items.reverse!      # as I want the results with highests savings on top
   end
 
   def new
