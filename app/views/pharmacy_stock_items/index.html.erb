@@ -9,6 +9,12 @@
       <%= submit_tag "Import" %>
 <% end %>
 
+<h4> Refine your search here</h4>
+<%= form_tag pharmacy_stock_items_path, method: :get do %>
+        <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
+          <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search Pharmacy items by APN or name, leave blank for full list"%>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
 
 <% @pharmacy_stock_items.each do |item| %>
 <%= item.name %>

@@ -1,7 +1,18 @@
 class PharmacyStockItemsController < ApplicationController
-  def index
+  def index   
     @pharmacy_stock_items = PharmacyStockItem.all
+    if params[:query].present?
+      @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query])
+    end  
   end
+
+  def edit
+    if params[:query].present?
+      @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query])
+      #maybe render a partial to appear on the page >?
+    end
+  
+  end  
 
   def new
     @pharmacy_stock_item = PharmacyStockItem.new
@@ -16,7 +27,7 @@ class PharmacyStockItemsController < ApplicationController
     @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
     @pharmacy_stock_item.update(pharmacy_stock_item_params)
     @pharmacy_stock_item.save
-    redirect_to _pharmacy_stock_items_index_path
+ 
   end
 
   def pharmacy_stock_item_params

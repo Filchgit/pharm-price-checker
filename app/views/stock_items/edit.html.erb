@@ -23,3 +23,18 @@ Chemist Warehouse Discount off Recommended retail: <%= price_reduction %>
 
 <%= f.submit %>
 <% end %> 
+
+
+<% @pharmacy_stock_items.each do |item| %>
+<%= item.name %>
+<% if item.ws1_cost.to_s.length > 2 %>
+Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+<% end %>
+<% if item.last_invoice_cost.to_s.length > 2 %>
+Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+ <% end %>
+
+Pharmacy Apn <%= item.apn %>
+Pharmacy pde <%= item.pde %>
+<br>
+<% end %> 
