@@ -35,4 +35,10 @@ class PharmacyStockItemsController < ApplicationController
                                                 :last_invoice_cost, :pde, :apn)
   end
 
+  def compare
+    @pharmacy_stock_items = PharmacyStockItem.all
+    @stock_items = StockItem.all
+  end
+
+
 end

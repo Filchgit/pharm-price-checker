@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+
   get 'pharmacy_stock_items/index'
+  get 'pharmacy_stock_items/compare'
   get 'stock_items/index'
   get 'stock_items/new'
   get 'stock_items/create'
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
     collection { post :upload }
   end
 
-  resources :pharmacy_stock_items, only: [:index, :create, :new, :edit, :update ] do
+  resources :pharmacy_stock_items, only: [:index, :create, :new, :edit, :update, :compare ] do
     collection { post :upload }
   end
 
