@@ -1,6 +1,8 @@
 
 <h1>Current Tracked Items</h1>
 
+Number of Items being tracked: <%= @stock_items.count %> 
+
 <h4>Import Stock Items</h4>
 <%= form_tag upload_stock_items_path, multipart: true do %>
       <%= file_field_tag :file %>

@@ -1,6 +1,8 @@
 <h1>PharmacyStockItems#index</h1>
 <p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
 
+ Number of pharmacy items being tracked  <%= @pharmacy_stock_items.count  %> 
+
 <h4>Import Pharmacy Stock Items</h4>
 <%= form_tag upload_pharmacy_stock_items_path, multipart: true do %>
       <%= file_field_tag :file %>

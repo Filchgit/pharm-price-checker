@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'pharmacy_stock_items/index'
   get 'stock_items/index'
   get 'stock_items/new'
