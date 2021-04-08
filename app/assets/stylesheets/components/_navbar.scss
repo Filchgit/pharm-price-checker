@@ -1,0 +1,58 @@
+.navbar{
+  font-family: 'Montserrat';
+
+}
+
+.navbar-lewagon {
+  justify-content: space-between;
+  background-color: black;
+  padding-top: 10px;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navHead {
+    font-size: 13px;
+    color: #e6e6e6;
+    // border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-left: 4px;
+    padding-bottom: 3px;
+}
+.navHead:hover {
+  color: #454d55;
+}
+
+.userHead{
+  font-size: 13px;
+    color: #e6e6e6;
+    border-top: 1px solid;
+    // border-bottom: 1px solid;
+    margin-left: 4px;
+    padding-bottom: 3px;
+
+}
+
+.navbar-brand {
+      display: inline-block;
+img {
+     width: 25px;
+    height: 25px;
+    margin-left: 1px;
+
+}
+}
+
+.nav-link{
+  color: #e6e6e6 !important;
+}
+
+#newsong{
+  color: #e6e6e6;
+}
+
+.avatar {
+  object-fit: cover;
+}

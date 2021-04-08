@@ -1,0 +1,31 @@
+<h1>PharmacyStockItems#index</h1>
+<p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+
+ Number of pharmacy items being tracked  <%= @pharmacy_stock_items.count  %> 
+
+<h4>Import Pharmacy Stock Items</h4>
+<%= form_tag upload_pharmacy_stock_items_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+<% end %>
+
+<h4> Refine your search here</h4>
+<%= form_tag pharmacy_stock_items_path, method: :get do %>
+        <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
+          <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search Pharmacy items by APN or name, leave blank for full list"%>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
+
+<% @pharmacy_stock_items.each do |item| %>
+<%= item.name %>
+<% if item.ws1_cost.to_s.length > 2 %>
+Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+<% end %>
+<% if item.last_invoice_cost.to_s.length > 2 %>
+Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+ <% end %>
+
+Pharmacy Apn <%= item.apn %>
+Pharmacy pde <%= item.pde %>
+<br>
+<% end %> 
