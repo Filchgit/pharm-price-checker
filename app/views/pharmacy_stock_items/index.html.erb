@@ -1,5 +1,5 @@
-<h1>PharmacyStockItems#index</h1>
-<p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+<h1>Harpers Pharmacy Products to Check</h1>
+
 
  Number of pharmacy items being tracked  <%= @pharmacy_stock_items.count  %> 
 
@@ -28,4 +28,6 @@ Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
 Pharmacy Apn <%= item.apn %>
 Pharmacy pde <%= item.pde %>
 <br>
+
 <% end %> 
+<p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
