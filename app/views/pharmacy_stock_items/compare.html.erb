@@ -1,47 +1,53 @@
 <h2>Ok so this page is where we get the comparison data </h2>
-# so what I want to do on this page is list all pharmacy items and if they exist the matching CW item next to and write some calcs based on wholesale prices 
-
-<br>
 
 
 <% @pharmacy_stock_items.each do |item| %>
-<% matched_stock = StockItem.find_by pde: item.pde %>
+<% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
 <% if matched_stock != nil %> 
 <br>
-
-Your Stock Item:
-<%= item.name %>
-<% if item.ws1_cost.to_s.length > 2 %>
-Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
-<% end %>
-<% if item.last_invoice_cost.to_s.length > 2 %>
-Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
- <% end %>
-Pharmacy Apn <%= item.apn %>
-Pharmacy pde <%= item.pde %>
-<br>
-Matching CW Item:
-<%= matched_stock.name  %> <br>
-Pde <%= matched_stock.apn_barcode_1 %> <br>
-Price at Scrape:
-<% if matched_stock.price_at_scrape.to_s.length >= 3 %>
- $<%= matched_stock.price_at_scrape.to_s.insert(-3,'.') %>
-<% end %> <br>
-Retail Price Reduction:
-<% case matched_stock.price_reduction_rec_retail_at_scrape.to_s.length %>
-<% when 2 %>
-  $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
-<% when 1 %>
- $<% matched_stock.price_reduction_rec_retail_at_scrape.to_s %> 
-<% else %>
- $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+<div class="cards">
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="card h-100">
+        Your Stock Item:
+        <%= item.name %> <br>
+        Pharmacy Apn <%= item.apn %> <br>
+        <% if item.ws1_cost.to_s.length > 2 %>
+        Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+        <% end %> <br>
+        <% if item.last_invoice_cost.to_s.length > 2 %>
+        Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+        <% end %> <br>
+        Pharmacy pde <%= item.pde %> <br>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="card h-100">
+        Matching CW Item:
+        <%= matched_stock.name  %> <br>
+        Apn: <%= matched_stock.apn_barcode_1 %> <br>
+        Price at Scrape:
+        <% if matched_stock.price_at_scrape.to_s.length >= 3 %>
+        $<%= matched_stock.price_at_scrape.to_s.insert(-3,'.') %>
+        <% end %> <br>
+        Retail Price Reduction:
+        <% case matched_stock.price_reduction_rec_retail_at_scrape.to_s.length %>
+        <% when 2 %>
+          $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
+        <% when 1 %>
+        $<% matched_stock.price_reduction_rec_retail_at_scrape.to_s %> 
+        <% else %>
+        $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+        <% end %> 
+        <br>
+        Item price description: <%= matched_stock.price_description %> <br>
+        Last Scrape Date:  <%= matched_stock.scrape_date %> 
+        <% end %>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %> 
-<br>
 
-Item price description: <%= matched_stock.price_description %> <br>
-Last Scrape Date:  <%= matched_stock.scrape_date %> 
-
-<% end %>
-
-<br>
-<% end %> 
+# so what I want to do on this page is list all pharmacy items and if they exist the matching CW item next to and write some calcs based on wholesale prices 

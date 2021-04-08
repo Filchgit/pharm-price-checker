@@ -1,52 +1,55 @@
+ <div class="stockContainer" >
+  <h1>Current Tracked Items</h1>
 
-<h1>Current Tracked Items</h1>
+  Number of Items being tracked: <%= @stock_items.count %> 
 
-Number of Items being tracked: <%= @stock_items.count %> 
-
-<h4>Import Stock Items</h4>
-<%= form_tag upload_stock_items_path, multipart: true do %>
-      <%= file_field_tag :file %>
-      <%= submit_tag "Import" %>
-<% end %>
-
-<h4> Refine your search here</h4>
-<%= form_tag stock_items_path, method: :get do %>
-        <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
-          <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search CW stock items by APN or name, leave blank for full list"%>
-          <%= submit_tag "Search", class: "btn btn-primary" %>
-        <% end %>
-
-<% @stock_items.each do |item| %>
-<%= item.name %> <br>
-Apn:<%= item.apn_barcode_1 %>
-Pde: <%= item.pde %>
-<br>
-Price at Scrape
-<% if item.price_at_scrape.to_s.length >= 3 %>
- $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
-<% end %>
-Retail Price Reduction
-<% case item.price_reduction_rec_retail_at_scrape.to_s.length %>
-<% when 2 %>
-  $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
-<% when 1 %>
- $<% item.price_reduction_rec_retail_at_scrape.to_s %> 
-<% else %>
- $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
-<% end %> 
-<br>
-
-Item price description: <%= item.price_description %> <br>
-Last Scrape Date:  <%= item.scrape_date %> 
-  <%= link_to edit_stock_item_path(:id => item.id), method: :get do %>
-  <p> edit this stock item</p>
-
+  <h4>Import Stock Items</h4>
+  <%= form_tag upload_stock_items_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
   <% end %>
-<% end %> 
 
-<h1>StockItems#index</h1>
-<p>Find me in app/views/stock_items/index.html.erb</p>
+  <h4> Refine your search here</h4>
+  <%= form_tag stock_items_path, method: :get do %>
+          <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
+            <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search CW stock items by APN or name, leave blank for full list"%>
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          <% end %>
 
-<h2>So I am doing this work so I can hang out more at places like this with these people</h2>
-<%= cl_image_tag("https://res.cloudinary.com/jomermac-pty-ltd/image/upload/v1614401037/dbb2xygqdfwt97yqbp8k.jpg",
-      width: 400, height: 600, crop: :fill) %>
+  <% @stock_items.each do |item| %>
+  <%= item.name %> <br>
+  Apn:<%= item.apn_barcode_1 %>
+  Pde: <%= item.pde %>
+  <br>
+  Price at Scrape
+  <% if item.price_at_scrape.to_s.length >= 3 %>
+  $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
+  <% end %>
+  Retail Price Reduction
+  <% case item.price_reduction_rec_retail_at_scrape.to_s.length %>
+  <% when 2 %>
+    $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
+  <% when 1 %>
+  $<% item.price_reduction_rec_retail_at_scrape.to_s %> 
+  <% else %>
+  $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+  <% end %> 
+  <br>
+
+  Item price description: <%= item.price_description %> <br>
+  Last Scrape Date:  <%= item.scrape_date %> 
+    <%= link_to edit_stock_item_path(:id => item.id), method: :get do %>
+    <p> edit this stock item</p>
+
+    <% end %>
+  <% end %> 
+
+
+
+
+  <h2>So I am doing this work so I can hang out more at places like this with these people</h2>
+  <%= cl_image_tag("https://res.cloudinary.com/jomermac-pty-ltd/image/upload/v1614401037/dbb2xygqdfwt97yqbp8k.jpg",
+        width: 400, height: 600, crop: :fill) %>
+
+  <p>Find me in app/views/stock_items/index.html.erb</p>
+</div>
