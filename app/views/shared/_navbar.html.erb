@@ -11,11 +11,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
+
         <li class="nav-item active">
           <%= link_to "CW Tracked Items", root_path,  class: "nav-link" %>
         </li>
           <li class="nav-item active">
           <%= link_to "Your Items", pharmacy_stock_items_index_path,  class: "nav-link" %>
+        </li>
+          <li class="nav-item active">
+          <%= link_to "Compare Stock", pharmacy_stock_items_compare_path,  class: "nav-link" %>
         </li>
       
         <li class="nav-item dropdown">
