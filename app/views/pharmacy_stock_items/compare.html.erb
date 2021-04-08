@@ -4,7 +4,7 @@
 <% @pharmacy_stock_items.each do |item| %>
 <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
 <% if matched_stock != nil %> 
-<br>
+
 <div class="cards">
   <div class="row">
     <div class="col col-md-6">
@@ -43,7 +43,7 @@
         Item price description: <%= matched_stock.price_description %> <br>
         Last Scrape Date:  <%= matched_stock.scrape_date %> 
         <% end %>
-        <br>
+      
       </div>
     </div>
   </div>
