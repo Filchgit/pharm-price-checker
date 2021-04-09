@@ -1,9 +1,12 @@
 class PharmacyStockItemsController < ApplicationController
-  def index   
+  def index
+    @pharmacy_stock_items = policy_scope(PharmacyStockItem)
     @pharmacy_stock_items = PharmacyStockItem.all
+    
     if params[:query].present?
       @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query])
     end  
+    
   end
 
   def edit
@@ -19,6 +22,7 @@ class PharmacyStockItemsController < ApplicationController
   end
 
   def upload
+    authorize PharmacyStockItem
     PharmacyStockItem.upload(params[:file])
     redirect_to pharmacy_stock_items_index_path
   end
@@ -36,6 +40,8 @@ class PharmacyStockItemsController < ApplicationController
   end
 
   def compare
+    authorize PharmacyStockItem
+    authorize StockItem
     @pharmacy_stock_items = PharmacyStockItem.all
     @stock_items = StockItem.all
   end
