@@ -28,7 +28,13 @@
       <% end %> <br>
       Pharmacy Apn: <%= item.apn %> <br>
       Pharmacy pde: <%= item.pde %> <br>
-      <br>
+      <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
+      <% if matched_stock == nil %>     
+      Not Linked
+      <% else %>
+      Linked to: <%= matched_stock.name %>
+      <% end %>
+      
     </div>
   <% end %>  
 </div>  
