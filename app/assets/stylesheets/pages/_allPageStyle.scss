@@ -8,3 +8,14 @@ body{
 p{
   margin: 0;
 }
+
+.cards{
+  margin: 10px 75px;
+}
+
+// note that the compare page uses rows as I want them to be side to side only for comparison
+.card-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}

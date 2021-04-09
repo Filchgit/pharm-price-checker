@@ -9,8 +9,8 @@
   <div class="row">
     <div class="col col-md-6">
       <div class="card h-100">
-        Your Stock Item:
-        <%= item.name %> <br>
+        <b> Your Stock Item:
+        <%= item.name %> </b>  
         Pharmacy Apn <%= item.apn %> <br>
         <% if item.ws1_cost.to_s.length > 2 %>
         Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
@@ -23,8 +23,8 @@
     </div>
     <div class="col col-md-6">
       <div class="card h-100">
-        Matching CW Item:
-        <%= matched_stock.name  %> <br>
+        <b> Matching CW Item:
+        <%= matched_stock.name  %> </b>
         Apn: <%= matched_stock.apn_barcode_1 %> <br>
         Price at Scrape:
         <% if matched_stock.price_at_scrape.to_s.length >= 3 %>

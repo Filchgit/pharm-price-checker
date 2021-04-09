@@ -15,19 +15,23 @@
           <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search Pharmacy items by APN or name, leave blank for full list"%>
           <%= submit_tag "Search", class: "btn btn-primary" %>
         <% end %>
-
-<% @pharmacy_stock_items.each do |item| %>
-<%= item.name %>
-<% if item.ws1_cost.to_s.length > 2 %>
-Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
-<% end %>
-<% if item.last_invoice_cost.to_s.length > 2 %>
-Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
- <% end %>
-
-Pharmacy Apn <%= item.apn %>
-Pharmacy pde <%= item.pde %>
 <br>
+<div class="card-grid"> 
+  <% @pharmacy_stock_items.each do |item| %>
+    <div class="card h-100">
+      <b> <%= item.name %> </b> 
+      <% if item.ws1_cost.to_s.length > 2 %>
+        Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+      <% end %> <br>
+      <% if item.last_invoice_cost.to_s.length > 2 %>
+        Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+      <% end %> <br>
+      Pharmacy Apn: <%= item.apn %> <br>
+      Pharmacy pde: <%= item.pde %> <br>
+      <br>
+    </div>
+  <% end %>  
+</div>  
 
-<% end %> 
+
 <p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
