@@ -3,8 +3,9 @@
 
 <% @pharmacy_stock_items.each do |item| %>
 <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
-<% if matched_stock != nil %> 
 
+<% if matched_stock != nil &&  matched_stock.price_at_scrape * 10/11  < item.last_invoice_cost * 1.03 %> 
+ 
 <div class="cards">
   <div class="row">
     <div class="col col-md-6">
@@ -21,15 +22,21 @@
         Pharmacy pde <%= item.pde %> <br>
       </div>
     </div>
-    
+
     <div class="col col-md-6">
       <div class="card h-100">
         <b> Matching CW Item:
         <%= matched_stock.name  %> </b>
         Apn: <%= matched_stock.apn_barcode_1 %> <br>
+
         Price at Scrape:
         <% if matched_stock.price_at_scrape.to_s.length >= 3 %>
-        $<%= matched_stock.price_at_scrape.to_s.insert(-3,'.') %>
+          $<%= matched_stock.price_at_scrape.to_s.insert(-3,'.') %>
+        <% end %> <br>
+        Price at Scrape ex GST:
+        <%   matched_ex_gst = matched_stock.price_at_scrape * 10/11 %>
+        <% if matched_ex_gst.to_s.length >= 3 %>
+          $<%= matched_ex_gst.to_s.insert(-3,'.') %>
         <% end %> <br>
         Retail Price Reduction:
         <% case matched_stock.price_reduction_rec_retail_at_scrape.to_s.length %>
