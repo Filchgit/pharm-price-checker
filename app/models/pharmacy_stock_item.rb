@@ -1,5 +1,6 @@
 class PharmacyStockItem < ApplicationRecord
 
+
   def self.upload(file)
     if file != nil
       CSV.foreach(file.path) do |row|

@@ -61,4 +61,5 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'devise'
 gem 'bootstrap'
 gem 'pg_search', '~> 2.3.0'
+gem 'pundit'
 
