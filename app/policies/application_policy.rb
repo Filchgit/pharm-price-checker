@@ -43,7 +43,10 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      if user.admin? || user.premium?
+        scope.all 
+     end
+     
     end
   end
 end

@@ -1,13 +1,13 @@
 class StockItemsController < ApplicationController
 
   def index
-    @stock_items = policy_scope(StockItem)
+   
     @stock_items = StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape
     @stock_items.reverse!      # as I want the results with highests savings on top
     if params[:query].present?
       @stock_items = StockItem.search_by_name_apn(params[:query])
-    end  
-
+    end 
+    @stock_items = policy_scope(StockItem)
   end
 
   def new
@@ -24,13 +24,16 @@ class StockItemsController < ApplicationController
   end
 
   def update
+     
     @stock_item = StockItem.find(params[:id])
     @stock_item.update(stock_item_params)
+    authorize @stock_item
     @stock_item.save
     redirect_to stock_items_index_path
   end
 
   def upload
+    authorize StockItem
     StockItem.upload(params[:file])
     redirect_to stock_items_index_path
   end

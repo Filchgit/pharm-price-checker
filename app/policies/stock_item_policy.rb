@@ -1,9 +1,7 @@
 class StockItemPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.admin? || user.premium?
-         scope.all
-      end
+     scope.all if ( user.admin|| user.premium )
     end
   end
 
@@ -13,4 +11,33 @@ class StockItemPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    if user.admin? || user.premium?
+      true
+    end
+  end
+
+  def update?
+    if user.admin? || user.premium?
+      true
+    end
+  end
+
+  def self?
+    if user.admin? || user.premium?
+      true
+    end
+  end
+
+  def upload?
+    if user.admin? || user.premium?
+      true
+    end
+  end
+
+  def compare?
+    if user.admin? || user.premium?
+      true
+    end
+  end
 end
