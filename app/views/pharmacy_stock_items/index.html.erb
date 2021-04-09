@@ -17,7 +17,8 @@
         <% end %>
 <br>
 <div class="card-grid"> 
-  <% @pharmacy_stock_items.each do |item| %>
+ <% if current_user == User.first || current_user == User.second %>
+    <% @pharmacy_stock_items.each do |item| %>
     <div class="card h-100">
       <b> <%= item.name %> </b> 
       <% if item.ws1_cost.to_s.length > 2 %>
@@ -37,6 +38,7 @@
       
     </div>
   <% end %>  
+  <% end %>
 </div>  
 
 
