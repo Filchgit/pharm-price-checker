@@ -1,8 +1,8 @@
 class PharmacyStockItemsController < ApplicationController
   def index
-    
+    @pharmacy_stock_items = policy_scope(PharmacyStockItem)
     @pharmacy_stock_items = PharmacyStockItem.all
-    #@pharmacy_stock_items = policy_scope(PharmacyStockItem)
+    
     if params[:query].present?
       @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query])
     end  

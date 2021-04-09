@@ -1,13 +1,13 @@
 class StockItemsController < ApplicationController
 
   def index
-   
+    @stock_items = policy_scope(StockItem)
     @stock_items = StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape
     @stock_items.reverse!      # as I want the results with highests savings on top
     if params[:query].present?
       @stock_items = StockItem.search_by_name_apn(params[:query])
     end 
-    @stock_items = policy_scope(StockItem)
+    
   end
 
   def new
