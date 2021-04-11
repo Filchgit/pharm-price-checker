@@ -17,27 +17,28 @@
         <% end %>
 <br>
 <div class="card-grid"> 
-  <% @pharmacy_stock_items.each do |item| %>
-    <% if current_user == User.first || current_user == User.second %>
-      <div class="card h-100">
-        <b> <%= item.name %> </b> 
-        <% if item.ws1_cost.to_s.length > 2 %>
-          Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        <% if item.last_invoice_cost.to_s.length > 2 %>
-          Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        Pharmacy Apn: <%= item.apn %> <br>
-        Pharmacy pde: <%= item.pde %> <br>
-        <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
-        <% if matched_stock == nil %>     
-        Not Linked
-        <% else %>
-        Linked to: <%= matched_stock.name %>
-        <% end %>
-    <% end %>   
+
+ <% if current_user == User.first || current_user == User.second %>
+    <% @pharmacy_stock_items.each do |item| %>
+    <div class="card h-100">
+      <b> <%= item.name %> </b> 
+      <% if item.ws1_cost.to_s.length > 2 %>
+        Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
+      <% end %> <br>
+      <% if item.last_invoice_cost.to_s.length > 2 %>
+        Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
+      <% end %> <br>
+      Pharmacy Apn: <%= item.apn %> <br>
+      Pharmacy pde: <%= item.pde %> <br>
+      <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
+      <% if matched_stock == nil %>     
+      Not Linked
+      <% else %>
+      Linked to: <%= matched_stock.name %>
+      <% end %>
     </div>
   <% end %>  
+  <% end %>
 </div>  
 
 
