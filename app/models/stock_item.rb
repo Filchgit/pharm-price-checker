@@ -13,7 +13,6 @@ class StockItem < ApplicationRecord
         stock_array.each do |item|
           item_exists = true if item.name == row[0]
         end
-        
         if item_exists == false # need to do something about the headers, if I leave them in 
           # gosh this is a lot of hassle to avoid using decimals for money!!!
           new_stock_item = StockItem.new
