@@ -5,7 +5,7 @@ class StockItem < ApplicationRecord
 
   def self.upload(file)
     if file != nil
-      
+  
       CSV.foreach(file.path) do |row|
         # well I really need to refactor this
         item_exists = false

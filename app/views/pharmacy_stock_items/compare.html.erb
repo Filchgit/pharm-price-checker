@@ -1,5 +1,5 @@
 <h2>Ok so this page is where we get the comparison data </h2>
-
+<p> At the moment this is hard coded so that items will only appear on this page when they a) are linked to a CW item and b) the price at scrape cost ex gst is under the last invoice cost * 1.03%</p>
 
 <% @pharmacy_stock_items.each do |item| %>
 <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>

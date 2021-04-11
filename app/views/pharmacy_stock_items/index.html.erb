@@ -17,6 +17,7 @@
         <% end %>
 <br>
 <div class="card-grid"> 
+
  <% if current_user == User.first || current_user == User.second %>
     <% @pharmacy_stock_items.each do |item| %>
     <div class="card h-100">
@@ -35,7 +36,6 @@
       <% else %>
       Linked to: <%= matched_stock.name %>
       <% end %>
-      
     </div>
   <% end %>  
   <% end %>
