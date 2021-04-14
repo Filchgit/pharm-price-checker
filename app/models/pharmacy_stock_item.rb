@@ -1,6 +1,5 @@
 class PharmacyStockItem < ApplicationRecord
 
-
   def self.upload(file)
     if file != nil
       CSV.foreach(file.path) do |row|
@@ -30,8 +29,18 @@ class PharmacyStockItem < ApplicationRecord
           update_pharmacy_item.last_invoice_cost = row [19].to_s.delete('.$').to_i
           update_pharmacy_item.save 
         end
-
       end
+    end
+  end
+
+  def self.to_csv
+    CSV.generate do |csv|
+    
+      csv << column_names
+      all.each do |pharmacy_stock_item|
+        csv << pharmacy_stock_item.attributes.values
+      end
+
     end
   end
 
