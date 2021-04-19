@@ -10,12 +10,8 @@ class PharmacyStockItemsController < ApplicationController
   end
 
   def edit
-    if params[:query].present?
-      @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query])
-      #maybe render a partial to appear on the page >?
-    end
-  
-  end  
+    @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query]) if params[:query].present?
+  end
 
   def new
     @pharmacy_stock_item = PharmacyStockItem.new
@@ -31,12 +27,6 @@ class PharmacyStockItemsController < ApplicationController
     @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
     @pharmacy_stock_item.update(pharmacy_stock_item_params)
     @pharmacy_stock_item.save
- 
-  end
-
-  def pharmacy_stock_item_params
-    params.require(:pharmacy_stock_item).permit(:name, :pharmacy_id, :ws1_cost,
-                                                :last_invoice_cost, :pde, :apn)
   end
 
   def compare
@@ -46,5 +36,8 @@ class PharmacyStockItemsController < ApplicationController
     @stock_items = StockItem.all
   end
 
-
+  def pharmacy_stock_item_params
+    params.require(:pharmacy_stock_item).permit(:name, :pharmacy_id, :ws1_cost,
+                                                :last_invoice_cost, :pde, :apn)
+  end
 end

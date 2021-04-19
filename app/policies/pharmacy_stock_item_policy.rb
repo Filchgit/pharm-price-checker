@@ -2,26 +2,19 @@ class PharmacyStockItemPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-     false
+      false
     end
   end
 
   def index?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def upload?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def compare?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
-
 end

@@ -1,43 +1,33 @@
 class StockItemPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-     scope.all if ( user.admin|| user.premium )
+      false
+      # scope.all if user.admin || user.premium
+      # Not sure what this resolve is doing but pharmacy stock items is false and they are working
     end
   end
 
   def edit?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def index?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def update?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def self?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def upload?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 
   def compare?
-    if user.admin? || user.premium?
-      true
-    end
+    true if user.admin? || user.premium?
   end
 end
