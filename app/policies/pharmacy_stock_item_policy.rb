@@ -1,5 +1,4 @@
 class PharmacyStockItemPolicy < ApplicationPolicy
-
   class Scope < Scope
     def resolve
       false

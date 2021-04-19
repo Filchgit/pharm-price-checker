@@ -1,10 +1,11 @@
 class StockItem < ApplicationRecord
+  
   has_one_attached :photo
-
   validates :name, uniqueness: true
 
   def self.upload(file)
     return if file.nil?
+
     CSV.foreach(file.path) do |row|
       if StockItem.find_by(name: row[0]).nil?
         # gosh this is a lot of hassle to avoid using decimals for money!!!
@@ -40,21 +41,16 @@ class StockItem < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_name_apn, against: [:name, :apn_barcode_1], using: { tsearch: { prefix: true } }
 
-  private
-
-  def self.price_at_scrape_set(row)  
+  def self.price_at_scrape_set(row)
     dec_index = row[3].index('.')
     case dec_index
     when nil
       price_at_scrape = "#{row[3]}00"
     when 1
-      if row[3].to_s.length == 3
-        price_at_scrape = "#{row[3].to_s.delete('.')}0"
-      else
-        price_at_scrape = row[3].to_s.delete('.').to_i
-      end
+      price_at_scrape = "#{row[3].to_s.delete('.')}0" if row[3].to_s.length == 3
+      price_at_scrape = row[3].to_s.delete('.').to_i  if row[3].to_s.length != 3
     else
-      price_at_scrape = row[3].to_s.delete('.').to_i 
+      price_at_scrape = row[3].to_s.delete('.').to_i
     end
     price_at_scrape
   end
@@ -65,10 +61,8 @@ class StockItem < ApplicationRecord
     when nil
       price_reduction_rec_retail_at_scrape = "#{row[4]}00"
     when 1
-      price_reduction_rec_retail_at_scrape = "#{row[4].to_s.delete('.')}0" if row[4].to_s.length == 3    
-      else
-        price_reduction_rec_retail_at_scrape = row[4].to_s.delete('.')
-      end
+      price_reduction_rec_retail_at_scrape = "#{row[4].to_s.delete('.')}0" if row[4].to_s.length == 3
+      price_reduction_rec_retail_at_scrape = row[4].to_s.delete('.') if row[4].to_s.length != 3
     else
       price_reduction_rec_retail_at_scrape = row[4].to_s.delete('.').to_i
     end
