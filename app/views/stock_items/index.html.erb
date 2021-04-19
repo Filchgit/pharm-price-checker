@@ -39,8 +39,8 @@
         <br>
         Item price description: <%= item.price_description %> <br>
         Last Scrape Date:  <%= item.scrape_date %> 
-        <%= link_to edit_stock_item_path(:id => item.id), method: :get do %>
-            <p> edit this stock item</p>
+        <%= link_to   edit_stock_item_path(:id => item.id), class: "btn btn-info", method: :get do  %>
+           Edit this Stock Item
           <% end %>
       </div>    
     <% end %>

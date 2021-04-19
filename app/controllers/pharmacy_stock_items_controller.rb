@@ -6,9 +6,6 @@ class PharmacyStockItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @pharmacy_stock_items.to_csv }
-
-    
-   
     end
   end
 
