@@ -8,7 +8,7 @@ and be able to scrape from behind my stealth systems like Witopia.
 
 DB still in development; likely to add a whole lot more as time goes on.
 
-This is meant to be deployed via Heroku atm.
+This is currently deployed via Heroku atm.
 
 * Ruby version 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
 
