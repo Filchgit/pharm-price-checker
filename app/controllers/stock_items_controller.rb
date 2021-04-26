@@ -26,13 +26,13 @@ class StockItemsController < ApplicationController
     @stock_item.update(stock_item_params)
     authorize @stock_item
     @stock_item.save
-    redirect_to stock_items_index_path
+    redirect_to root_path
   end
 
   def upload
     authorize StockItem
     StockItem.upload(params[:file])
-    redirect_to stock_items_index_path
+    redirect_to root_path
   end
 
   def stock_item_params
