@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'pharmacy_stock_items/index'
   get 'pharmacy_stock_items/compare'
-  get 'stock_items/index'
+  # get 'stock_items/index'
   get 'stock_items/new'
   get 'stock_items/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

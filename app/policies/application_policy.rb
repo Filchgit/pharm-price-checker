@@ -44,9 +44,8 @@ class ApplicationPolicy
 
     def resolve
       if user.admin? || user.premium?
-        scope.all 
-     end
-     
+        scope.all
+      end
     end
   end
 end
