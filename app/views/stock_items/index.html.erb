@@ -1,4 +1,4 @@
- <div class="stockContainer" >
+<div class="stockContainer" >
   <h1>Current Tracked Items</h1>
 
   Number of Items being tracked: <%= @stock_items.count %> 
@@ -9,49 +9,59 @@
         <%= submit_tag "Import" %>
   <% end %>
 
-  <h4> Refine your search here</h4>
-  <%= form_tag stock_items_path, method: :get do %>
-          <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
-            <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search CW stock items by APN or name, leave blank for full list"%>
-            <%= submit_tag "Search", class: "btn btn-primary" %>
-          <% end %>
-<br>
-<div class="card-grid"> 
-  <% @stock_items.each do |item| %>
-      <% if current_user == User.first || current_user == User.second %>
-      <div class="card h-100">
-        <b> <%= item.name %>  </b>
-        Apn:<%= item.apn_barcode_1 %> <br>
-        Pde: <%= item.pde %>   <br>
-        Price at Scrape
-        <% if item.price_at_scrape.to_s.length >= 3 %>
-        $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        Retail Price Reduction
-        <% case item.price_reduction_rec_retail_at_scrape.to_s.length %>
-        <% when 2 %>
-          $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
-        <% when 1 %>
-        $<% item.price_reduction_rec_retail_at_scrape.to_s %> 
-        <% else %>
-        $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
-        <% end %> 
-        <br>
-        Item price description: <%= item.price_description %> <br>
-        Last Scrape Date:  <%= item.scrape_date %> 
-        <%= link_to   edit_stock_item_path(:id => item.id), class: "btn btn-info", method: :get do  %>
-           Edit this Stock Item
-          <% end %>
-      </div>    
+  <div class="search_and_backup">
+    <h4> Refine your search here</h4>
+    <%= form_tag stock_items_path, method: :get do %>
+      <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
+      <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search CW stock items by APN or name, leave blank for full list"%>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
-  <% end %> 
-</div>
+    <div class="admin">
+      <% if current_user.admin? %>
+        Admin only <br>
+        <%= link_to  "Backup as CSV", stock_items_path(format: "csv"), class: "btn btn-primary"  %>
+
+        <%= form_tag csv_upload_stock_items_path, multipart: true do %>
+            <%= file_field_tag :file %>
+          <%= submit_tag "Upload CSV Backup" %>
+         <% end %>
+      <% end %> 
+    </div>         
+  </div>
+
+  <div class="card-grid"> 
+    <% @stock_items.each do |item| %>
+        <% if current_user == User.first || current_user == User.second %>
+        <div class="card h-100">
+          <b> <%= item.name %>  </b>
+          Apn:<%= item.apn_barcode_1 %> <br>
+          Pde: <%= item.pde %>   <br>
+          Price at Scrape
+          <% if item.price_at_scrape.to_s.length >= 3 %>
+          $<%= item.price_at_scrape.to_s.insert(-3,'.') %>
+          <% end %> <br>
+          Retail Price Reduction
+          <% case item.price_reduction_rec_retail_at_scrape.to_s.length %>
+          <% when 2 %>
+            $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
+          <% when 1 %>
+          $<% item.price_reduction_rec_retail_at_scrape.to_s %> 
+          <% else %>
+          $<%= item.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+          <% end %> 
+          <br>
+          Item price description: <%= item.price_description %> <br>
+          Last Scrape Date:  <%= item.scrape_date %> 
+          <%= link_to   edit_stock_item_path(:id => item.id), class: "btn btn-info", method: :get do  %>
+            Edit this Stock Item
+            <% end %>
+        </div>    
+      <% end %>
+    <% end %> 
+  </div>
 
 
-<p>
- Download:
- <%= link_to  "Backup as CSV", stock_items_path(format: "csv"), class: "btn btn-primary"  %>
-</p>
+
 
 
 

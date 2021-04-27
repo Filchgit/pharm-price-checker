@@ -36,6 +36,12 @@ class StockItemsController < ApplicationController
     redirect_to stock_items_path
   end
 
+  def csv_upload
+    authorize StockItem
+    StockItem.csv_upload(params[:file])
+    redirect_to stock_items_path
+  end
+
   def stock_item_params
     params.require(:stock_item).permit(:name, :scrape_date, :price_reduction_rec_retail_at_scrape,
                                        :price_at_scrape, :price_description, :pde, :apn_barcode_1)

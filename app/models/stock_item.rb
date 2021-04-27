@@ -2,35 +2,34 @@ class StockItem < ApplicationRecord
   has_one_attached :photo
   validates :name, uniqueness: true
 
-  def self.upload(file)
+  def self.upload(file) 
+    # upload is for uploading the scraped files via SQL / C#
     return if file.nil?
 
     CSV.foreach(file.path) do |row|
+      stock_item = StockItem.new
       if StockItem.find_by(name: row[0]).nil?
-        # gosh this is a lot of hassle to avoid using decimals for money!!!
-        new_stock_item = StockItem.new
-        new_stock_item.name = row[0]
-        new_stock_item.scrape_date = row[2]
-        new_stock_item.price_at_scrape = price_at_scrape_set(row)
-        new_stock_item.price_reduction_rec_retail_at_scrape = price_reduction_rec_retail_at_scrape_set(row)
-        new_stock_item.price_description = row[1]
-        new_stock_item.save
+        stock_item.name = row[0]
       elsif !StockItem.find_by(name: row[0]).nil?
-        update_item = StockItem.find_by name: row[0]
-        update_item.scrape_date = row[2]
-        update_item.price_reduction_rec_retail_at_scrape = row[4].to_s.delete('.').to_i
-        update_item.price_at_scrape = price_at_scrape_set(row)
-        update_item.price_reduction_rec_retail_at_scrape = price_reduction_rec_retail_at_scrape_set(row)
-        update_item.price_description = row[1]
-        update_item.save
+        stock_item = StockItem.find_by name: row[0]
       end
+      stock_item.scrape_date = row[2]
+      stock_item.price_at_scrape = price_at_scrape_set(row)
+      stock_item.price_reduction_rec_retail_at_scrape = price_reduction_rec_retail_at_scrape_set(row)
+      stock_item.price_description = row[1]
+      stock_item.save
     end
   end
 
-  def self.to_csv
+  def self.csv_upload(file)
+    # csv_upload is for uploading off backupped files
+    return if file.nil?
 
+    byebug
+  end
+
+  def self.to_csv
     CSV.generate do |csv|
-      # not coming here at all for some reason
       csv << column_names
       all.each do |stock_item|
         csv << stock_item.attributes.values

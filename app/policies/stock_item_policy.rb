@@ -30,4 +30,9 @@ class StockItemPolicy < ApplicationPolicy
   def compare?
     true if user.admin? || user.premium?
   end
+
+  def csv_upload?
+    true if user.admin?
+  end
+
 end
