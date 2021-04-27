@@ -28,6 +28,7 @@ class StockItem < ApplicationRecord
   end
 
   def self.to_csv
+
     CSV.generate do |csv|
       # not coming here at all for some reason
       csv << column_names
@@ -36,6 +37,7 @@ class StockItem < ApplicationRecord
       end
     end
   end
+
 
   include PgSearch::Model
   pg_search_scope :search_by_name_apn, against: [:name, :apn_barcode_1], using: { tsearch: { prefix: true } }
