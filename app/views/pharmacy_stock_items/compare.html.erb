@@ -1,62 +1,65 @@
-<h2>Ok so this page is where we get the comparison data </h2>
-<p> At the moment this is hard coded so that items will only appear on this page when they a) are linked to a CW item and b) the price at scrape cost ex gst is under the last invoice cost * 1.03%</p>
+<h2>Comparison data </h2>
+<p> At the moment this is hard coded so that items will only appear on this page when they  <br/> a) are linked to a CW item via equal apns that are not 0 and <br/>  b) the price at scrape cost ex gst is under the last invoice cost * 1.03%
+<br/>  Also the price at scrape ex GST calculation is done on everything as currently there is no field to denote GSTability as discussed. <br/> The matched items are ordered from the greatest retail price reduction down to the least</p>
 
-<% @pharmacy_stock_items.each do |item| %>
-<% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
+<% @stock_items =StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape  %>
+<% @stock_items.reverse! %>
+<% @stock_items.each  do |sitem|%>
+  <%  matched_pharm_stock = PharmacyStockItem.find_by apn: sitem.apn_barcode_1 %> 
+  <% next if sitem.apn_barcode_1 == 0 || sitem.apn_barcode_1 == nil %>
+  <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * 1.03   %>
 
-<% if matched_stock != nil &&  matched_stock.price_at_scrape * 10/11  < item.last_invoice_cost * 1.03 %> 
- 
-<div class="cards">
-  <div class="row">
-    <div class="col col-md-6">
-      <div class="card h-100">
-        <b> Your Stock Item:
-        <%= item.name %> </b>  
-        Pharmacy Apn <%= item.apn %> <br>
-        <% if item.ws1_cost.to_s.length > 2 %>
-        Ws1 cost: $<%= item.ws1_cost.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        <% if item.last_invoice_cost.to_s.length > 2 %>
-        Last Invoice Cost: $<%= item.last_invoice_cost.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        Pharmacy pde <%= item.pde %> <br>
+  
+ <div class="cards">
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="card h-100">
+          <b> Your Stock Item:
+          <%= matched_pharm_stock.name %> </b>  
+          Pharmacy Apn <%= matched_pharm_stock.apn %> <br>
+          <% if matched_pharm_stock.ws1_cost.to_s.length > 2 %>
+          Ws1 cost: $<%= matched_pharm_stock.ws1_cost.to_s.insert(-3,'.') %>
+          <% end %> <br>
+          <% if matched_pharm_stock.last_invoice_cost.to_s.length > 2 %>
+          Last Invoice Cost: $<%= matched_pharm_stock.last_invoice_cost.to_s.insert(-3,'.') %>
+          <% end %> <br>
+          Pharmacy pde <%= matched_pharm_stock.pde %> <br>
+        </div>
       </div>
-    </div>
 
-    <div class="col col-md-6">
-      <div class="card h-100">
-        <b> Matching CW Item:
-        <%= matched_stock.name  %> </b>
-        Apn: <%= matched_stock.apn_barcode_1 %> <br>
+      <div class="col col-md-6">
+        <div class="card h-100">
+          <b> Matching CW Item:
+          <%= sitem.name  %> </b>
+          Apn: <%= sitem.apn_barcode_1 %> <br>
 
-        Price at Scrape:
-        <% if matched_stock.price_at_scrape.to_s.length >= 3 %>
-          $<%= matched_stock.price_at_scrape.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        Price at Scrape ex GST:
-        <%   matched_ex_gst = matched_stock.price_at_scrape * 10/11 %>
-        <% if matched_ex_gst.to_s.length >= 3 %>
-          $<%= matched_ex_gst.to_s.insert(-3,'.') %>
-        <% end %> <br>
-        Retail Price Reduction:
-        <% case matched_stock.price_reduction_rec_retail_at_scrape.to_s.length %>
-        <% when 2 %>
-          $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
-        <% when 1 %>
-        $<% matched_stock.price_reduction_rec_retail_at_scrape.to_s %> 
-        <% else %>
-        $<%= matched_stock.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
-        <% end %> 
-        <br>
-        Item price description: <%= matched_stock.price_description %> <br>
-        Last Scrape Date:  <%= matched_stock.scrape_date %> 
-        <% end %>
-      
+          Price at Scrape:
+          <% if sitem.price_at_scrape.to_s.length >= 3 %>
+            $<%= sitem.price_at_scrape.to_s.insert(-3,'.') %>
+          <% end %> <br>
+          Price at Scrape ex GST:
+          <%   matched_ex_gst = sitem.price_at_scrape * 10/11 %>
+          <% if matched_ex_gst.to_s.length >= 3 %>
+            $<%= matched_ex_gst.to_s.insert(-3,'.') %>
+          <% end %> <br>
+          Retail Price Reduction:
+          <% case sitem.price_reduction_rec_retail_at_scrape.to_s.length %>
+          <% when 2 %>
+            $<%= sitem.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'0.') %>  
+          <% when 1 %>
+          $<% sitem.price_reduction_rec_retail_at_scrape.to_s %> 
+          <% else %>
+          $<%= sitem.price_reduction_rec_retail_at_scrape.to_s.insert(-3,'.') %>
+          <% end %> 
+          <br>
+          Item price description: <%= sitem.price_description %> <br>
+          Last Scrape Date:  <%= sitem.scrape_date %> 
+          
+        
+        </div>
       </div>
     </div>
   </div>
-</div>
-<% end %> 
 
 
-  
+<% end %>
