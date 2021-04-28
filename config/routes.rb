@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :stock_items, only: [:index, :create, :new, :edit, :update] do
     collection { post :upload }
+    collection { post :csv_upload }
   end
 
   resources :pharmacy_stock_items, only: [:index, :create, :new, :edit, :update, :compare ] do
