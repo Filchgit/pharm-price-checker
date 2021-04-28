@@ -25,7 +25,22 @@ class StockItem < ApplicationRecord
     # csv_upload is for uploading off backupped files
     return if file.nil?
 
-    byebug
+    CSV.foreach(file.path) do |row|
+      stock_item = StockItem.new
+      if StockItem.find_by(name: row[1]).nil?
+        stock_item.name = row[1]
+      elsif !StockItem.find_by(name: row[1]).nil?
+        stock_item = StockItem.find_by name: row[1]
+      end
+      stock_item.scrape_date = row[2]
+      stock_item.price_at_scrape = row[6]
+      stock_item.price_reduction_rec_retail_at_scrape = row[3]
+      stock_item.price_description = row[7]
+      stock_item.pde = row[8]
+      stock_item.apn_barcode_1 = row[9]
+      stock_item.save
+    end
+
   end
 
   def self.to_csv
