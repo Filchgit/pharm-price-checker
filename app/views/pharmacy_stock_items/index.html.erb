@@ -41,8 +41,10 @@
   <% end %>
 </div>  
 
-<p>
- Download:
- <%= link_to "Backup as CSV", pharmacy_stock_items_path(format: "csv"), class: "btn btn-primary"  %>
-</p>
-<p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+<% if current_user.admin? %>
+  <p>
+  Download:
+  <%= link_to "Backup as CSV", pharmacy_stock_items_path(format: "csv"), class: "btn btn-primary"  %>
+  </p>
+ <p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+<% end %>  

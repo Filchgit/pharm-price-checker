@@ -40,7 +40,6 @@ class StockItem < ApplicationRecord
       stock_item.apn_barcode_1 = row[9]
       stock_item.save
     end
-
   end
 
   def self.to_csv
@@ -51,7 +50,6 @@ class StockItem < ApplicationRecord
       end
     end
   end
-
 
   include PgSearch::Model
   pg_search_scope :search_by_name_apn, against: [:name, :apn_barcode_1], using: { tsearch: { prefix: true } }

@@ -5,7 +5,7 @@
 <% @stock_items =StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape  %>
 <% @stock_items.reverse! %>
 <% @stock_items.each  do |sitem|%>
-  <%  matched_pharm_stock = PharmacyStockItem.find_by apn: sitem.apn_barcode_1 %> 
+  <% matched_pharm_stock = PharmacyStockItem.find_by apn: sitem.apn_barcode_1 %> 
   <% next if sitem.apn_barcode_1 == 0 || sitem.apn_barcode_1 == nil %>
   <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * 1.03   %>
 

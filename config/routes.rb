@@ -19,4 +19,5 @@ Rails.application.routes.draw do
     collection { post :upload }
   end
 
+  resources :settings, only: [:create, :new, :edit, :update]
 end

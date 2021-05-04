@@ -69,5 +69,7 @@
   <%# cl_image_tag("https://res.cloudinary.com/jomermac-pty-ltd/image/upload/v1614401037/dbb2xygqdfwt97yqbp8k.jpg",
         width: 400, height: 600, crop: :fill) %>
 
+  <% if current_user.admin? %>
   <p>Find me in app/views/stock_items/index.html.erb</p>
+  <% end %>
 </div>
