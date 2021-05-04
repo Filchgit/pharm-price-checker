@@ -32,8 +32,11 @@ class PharmacyStockItemsController < ApplicationController
   def compare
     authorize PharmacyStockItem
     authorize StockItem
+    authorize Setting
     @pharmacy_stock_items = PharmacyStockItem.all
-    @stock_items = StockItem.all              #.all.sort_by &:price_reduction_rec_retail_at_scrape
+    @stock_items = StockItem.all  
+    @settings
+    #.all.sort_by &:price_reduction_rec_retail_at_scrape
   end
 
   def pharmacy_stock_item_params
