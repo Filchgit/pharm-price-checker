@@ -1,0 +1,7 @@
+<p>This is the page to edit settings, </p>
+
+
+  <%= simple_form_for @setting do |f| %>
+    <%= f.input :percent_difference, label: "Percentage Difference Range from last invoice cost"  %>
+    <%= f.submit %>
+    <% end %> 
