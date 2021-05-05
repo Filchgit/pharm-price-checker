@@ -35,7 +35,7 @@ class PharmacyStockItemsController < ApplicationController
     authorize Setting
     @pharmacy_stock_items = PharmacyStockItem.all
     @stock_items = StockItem.all  
-    @settings
+    @setting = Setting.first
     #.all.sort_by &:price_reduction_rec_retail_at_scrape
   end
 

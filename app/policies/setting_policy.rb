@@ -12,4 +12,9 @@ class SettingPolicy < ApplicationPolicy
   def update?
     true if user.admin? || user.premium?
   end
+
+  def compare?
+    true if user.admin? || user.premium?
+  end
+
 end
