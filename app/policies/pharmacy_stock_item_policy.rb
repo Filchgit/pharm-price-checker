@@ -16,4 +16,5 @@ class PharmacyStockItemPolicy < ApplicationPolicy
   def compare?
     true if user.admin? || user.premium?
   end
+
 end
