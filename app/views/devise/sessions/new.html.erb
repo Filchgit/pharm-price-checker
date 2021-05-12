@@ -1,4 +1,6 @@
-<h2>Log in</h2>
+
+<div class="container loginMain">
+<div class="loginPage">
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
@@ -13,8 +15,11 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%= f.button :submit, "Log in", class: "loginButton"  %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%# render "devise/shared/links" %>
+<!-- I actually don't want people to be able to sign themselves up atm -->
+</div>
+</div>
