@@ -11,6 +11,7 @@
 <% @stock_items.reverse! %>
 <% @stock_items.each  do |sitem|%>
   <% matched_pharm_stock = PharmacyStockItem.find_by apn: sitem.apn_barcode_1 %> 
+  <% next if matched_pharm_stock == nil %>
   <% next if sitem.apn_barcode_1 == 0 || sitem.apn_barcode_1 == nil %>
   <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
   <% matched_stock_count = matched_stock_count +1 %>
