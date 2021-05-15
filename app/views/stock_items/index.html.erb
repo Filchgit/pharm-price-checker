@@ -16,6 +16,7 @@
       <%= text_field_tag :query, params[:query], class: "form-control", id: "searchBar", placeholder: "Search CW stock items by APN or name, leave blank for full list"%>
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
+    
     <div class="admin">
       <% if current_user.admin? %>
         Admin only <br>

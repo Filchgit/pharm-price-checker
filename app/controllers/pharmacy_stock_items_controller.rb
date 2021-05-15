@@ -23,6 +23,12 @@ class PharmacyStockItemsController < ApplicationController
     redirect_to pharmacy_stock_items_index_path
   end
 
+  def gst_upload
+    authorize PharmacyStockItem
+    PharmacyStockItem.gst_upload(params[:file])
+    redirect_to pharmacy_stock_items_index_path
+  end
+
   def update
     @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
     @pharmacy_stock_item.update(pharmacy_stock_item_params)
@@ -34,13 +40,13 @@ class PharmacyStockItemsController < ApplicationController
     authorize StockItem
     authorize Setting
     @pharmacy_stock_items = PharmacyStockItem.all
-    @stock_items = StockItem.all  
+    @stock_items = StockItem.all
     @setting = Setting.first
     #.all.sort_by &:price_reduction_rec_retail_at_scrape
   end
 
   def pharmacy_stock_item_params
     params.require(:pharmacy_stock_item).permit(:name, :pharmacy_id, :ws1_cost,
-                                                :last_invoice_cost, :pde, :apn)
+                                                :last_invoice_cost, :pde, :apn, :gst_flag)
   end
 end

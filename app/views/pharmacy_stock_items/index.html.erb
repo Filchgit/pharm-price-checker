@@ -9,6 +9,21 @@
       <%= submit_tag "Import" %>
 <% end %>
 
+<% if current_user.admin? %>
+  <p>
+  Admin only:
+  <br>
+  Download:
+  <%= link_to "Backup as CSV", pharmacy_stock_items_path(format: "csv"), class: "btn btn-primary"  %>
+  </p>
+ <p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
+ <br>
+         <%= form_tag gst_upload_pharmacy_stock_items_path, multipart: true do %>
+            <%= file_field_tag :file %>
+          <%= submit_tag "Upload GST CSV file" %>
+         <% end %>
+<% end %> 
+
 <h4> Refine your search here</h4>
 <%= form_tag pharmacy_stock_items_path, method: :get do %>
         <%# image_tag "https://res.cloudinary.com/dck5uyfgr/image/upload/v1615460756/untitled_13_vljnyl.svg", class: "magnifyicon" %>
@@ -30,6 +45,7 @@
       <% end %> <br>
       Pharmacy Apn: <%= item.apn %> <br>
       Pharmacy pde: <%= item.pde %> <br>
+      Gst Flag: <%= item.gst_flag %> <br>
       <% matched_stock = StockItem.find_by apn_barcode_1: item.apn %>
       <% if matched_stock == nil %>     
       Not Linked
@@ -43,10 +59,4 @@
 
 <br>
 
-<% if current_user.admin? %>
-  <p>
-  Download:
-  <%= link_to "Backup as CSV", pharmacy_stock_items_path(format: "csv"), class: "btn btn-primary"  %>
-  </p>
- <p>Find me in app/views/pharmacy_stock_items/index.html.erb</p>
-<% end %>  
+ 

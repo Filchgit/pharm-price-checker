@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :pharmacy_stock_items, only: [:index, :create, :new, :edit, :update, :compare ] do
     collection { post :upload }
+    collection { post :gst_upload }
   end
 
   resources :settings, only: [:create, :new, :edit, :update]
