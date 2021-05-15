@@ -29,9 +29,7 @@ class PharmacyStockItem < ApplicationRecord
     return if file.nil?
 
     CSV.foreach(file.path) do |row|
-      if PharmacyStockItem.find_by(name: row[18]).nil?
-        next
-      elsif !PharmacyStockItem.find_by(name: row[18]).nil?
+      unless PharmacyStockItem.find_by(name: row[18]).nil?
         pharmacy_item = PharmacyStockItem.find_by name: row[18]  
         pharmacy_item.gst_flag = row[31]
         pharmacy_item.save
