@@ -13,6 +13,11 @@ class PharmacyStockItemPolicy < ApplicationPolicy
     true if user.admin? || user.premium?
   end
 
+  
+  def gst_upload?
+    true if user.admin? 
+  end
+  
   def compare?
     true if user.admin? || user.premium?
   end

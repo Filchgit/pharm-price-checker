@@ -23,6 +23,12 @@ class PharmacyStockItemsController < ApplicationController
     redirect_to pharmacy_stock_items_index_path
   end
 
+  def gst_upload
+    authorize PharmacyStockItem
+    PharmacyStockItem.gst_upload(params[:file])
+    redirect_to pharmacy_stock_items_index_path
+  end
+
   def update
     @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
     @pharmacy_stock_item.update(pharmacy_stock_item_params)

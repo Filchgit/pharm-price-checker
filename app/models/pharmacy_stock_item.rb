@@ -25,6 +25,20 @@ class PharmacyStockItem < ApplicationRecord
     end
   end
 
+  def self.gst_upload(file)
+    return if file.nil?
+
+    CSV.foreach(file.path) do |row|
+      if PharmacyStockItem.find_by(name: row[18]).nil?
+        next
+      elsif !PharmacyStockItem.find_by(name: row[18]).nil?
+        pharmacy_item = PharmacyStockItem.find_by name: row[18]  
+        pharmacy_item.gst_flag = row[31]
+        pharmacy_item.save
+      end
+    end
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names

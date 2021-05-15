@@ -1,10 +1,9 @@
 <h2>Comparison data </h2>
 <p> At the moment this items will only appear on this page when they  
 <br/> a) are linked to a CW item via equal apns that are not 0 and 
-<br/> b) the price at scrape cost ex gst is under the last invoice cost plus <%= @setting.percent_difference %>%
+<br/> b) the price at scrape cost (ex gst if gst is applicable) is under the last invoice cost plus <%= @setting.percent_difference %>%
 <br> You can change this percentage under settings percent difference, settings link a dropdown under your avatar
 <br>
-<br/> Also the price at scrape ex GST calculation is done on everything as currently there is no field to denote GSTability as discussed.
 <br/> The matched items are ordered from the greatest retail price reduction down to the least</p>
 <% matched_stock_count = 0 %>
 <% @stock_items =StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape  %>
@@ -13,7 +12,12 @@
   <% matched_pharm_stock = PharmacyStockItem.find_by apn: sitem.apn_barcode_1 %> 
   <% next if matched_pharm_stock == nil %>
   <% next if sitem.apn_barcode_1 == 0 || sitem.apn_barcode_1 == nil %>
-  <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+  <% if matched_pharm_stock.gst_flag == 'Y' || matched_pharm_stock.gst_flag == nil %>
+     <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+  <% elsif matched_pharm_stock.gst_flag == 'N' || matched_pharm_stock.gst_flag == 'F' %>
+     <% next if sitem.price_at_scrape  > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+  <% end %>
+ 
   <% matched_stock_count = matched_stock_count +1 %>
 
 
@@ -31,6 +35,7 @@
           Last Invoice Cost: $<%= matched_pharm_stock.last_invoice_cost.to_s.insert(-3,'.') %>
           <% end %> <br>
           Pharmacy pde <%= matched_pharm_stock.pde %> <br>
+          GST Flag: <%= matched_pharm_stock.gst_flag %>
         </div>
       </div>
 
@@ -44,11 +49,14 @@
           <% if sitem.price_at_scrape.to_s.length >= 3 %>
             $<%= sitem.price_at_scrape.to_s.insert(-3,'.') %>
           <% end %> <br>
+
           Price at Scrape ex GST:
-          <%   matched_ex_gst = sitem.price_at_scrape * 10/11 %>
+          <%   matched_ex_gst = sitem.price_at_scrape * 10/11 if matched_pharm_stock.gst_flag == 'Y' || matched_pharm_stock.gst_flag == nil %>
+          <%   matched_ex_gst = sitem.price_at_scrape if matched_pharm_stock.gst_flag == 'N' || matched_pharm_stock.gst_flag == 'F' %>
           <% if matched_ex_gst.to_s.length >= 3 %>
             $<%= matched_ex_gst.to_s.insert(-3,'.') %>
           <% end %> <br>
+
           Retail Price Reduction:
           <% case sitem.price_reduction_rec_retail_at_scrape.to_s.length %>
           <% when 2 %>
