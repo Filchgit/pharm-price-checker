@@ -52,6 +52,9 @@
       <% else %>
       Linked to: <%= matched_stock.name %>
       <% end %>
+       <%= link_to   edit_pharmacy_stock_item_path(:id => item.id), class: "btn btn-info", method: :get do  %>
+            Edit Pharmacy Item 
+            <% end %>
     </div>
   <% end %>  
   <% end %>
