@@ -17,8 +17,8 @@ class StockItemsController < ApplicationController
 
   def edit
     @stock_item = StockItem.find(params[:id])
-    @pharmacy_stock_items = PharmacyStockItem.all
-    @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query]) if params[:query].present?
+    # @pharmacy_stock_items = PharmacyStockItem.all   Think I was going to have these on the same page but didn't end up doing that 
+    # @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query]) if params[:query].present?
     authorize @stock_item
   end
 

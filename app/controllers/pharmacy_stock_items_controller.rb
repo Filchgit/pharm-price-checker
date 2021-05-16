@@ -10,7 +10,8 @@ class PharmacyStockItemsController < ApplicationController
   end
 
   def edit
-    @pharmacy_stock_items = PharmacyStockItem.search_by_name_apn(params[:query]) if params[:query].present?
+    authorize PharmacyStockItem
+    @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
   end
 
   def new
@@ -30,9 +31,11 @@ class PharmacyStockItemsController < ApplicationController
   end
 
   def update
+    authorize PharmacyStockItem
     @pharmacy_stock_item = PharmacyStockItem.find(params[:id])
     @pharmacy_stock_item.update(pharmacy_stock_item_params)
     @pharmacy_stock_item.save
+    redirect_to pharmacy_stock_items_path
   end
 
   def compare

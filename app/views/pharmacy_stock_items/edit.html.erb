@@ -1,0 +1,19 @@
+<br>
+<div class="edit_container">
+  <div class="card h-150 " id="stocked_edit_card">
+    <%  pharmacy_stock_item = @pharmacy_stock_item %> 
+    <h2> <%= pharmacy_stock_item.name %> <br> </h2>
+  
+   
+    
+    <br>
+    <%= simple_form_for pharmacy_stock_item do |f| %>
+    <%= f.input :gst_flag, collection: ['Y', 'N', 'F'], label: "Gst Flag"  %>
+    <%= f.input :ws1_cost, label: "wholesale cost in cents" %> 
+    <%= f.input :last_invoice_cost , label: "last invoice cost in cents" %>
+    <%= f.input :pde, label: "pde " %>
+    <%= f.input :apn, label: "barcode - note that this is used for all linking" %>
+    <%= f.submit %>
+    <% end %> 
+  </div>
+</div>

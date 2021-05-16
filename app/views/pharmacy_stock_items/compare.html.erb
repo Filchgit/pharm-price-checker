@@ -36,6 +36,10 @@
           <% end %> <br>
           Pharmacy pde <%= matched_pharm_stock.pde %> <br>
           GST Flag: <%= matched_pharm_stock.gst_flag %>
+
+          <%= link_to   edit_pharmacy_stock_item_path(:id => matched_pharm_stock.id), class: "btn btn-info", method: :get do  %>
+            Edit Pharmacy Item 
+            <% end %>
         </div>
       </div>
 
@@ -82,4 +86,4 @@
 
  Number of Items matched under these conditions:  <%= matched_stock_count %> 
 
- <!-- I think I should have been using  dollar = sprintf('%.2f', number) -->
+ <!-- I think I should have been using  dollar = sprintf('%.2f', number) though on further reading maybe not-->
