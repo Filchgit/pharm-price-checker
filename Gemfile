@@ -69,3 +69,5 @@ gem 'pg_search', '~> 2.3.0'
 gem 'pundit'
 gem 'simple_form'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'

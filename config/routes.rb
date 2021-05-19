@@ -10,6 +10,12 @@ Rails.application.routes.draw do
  
   root to: 'stock_items#index'
 
+  # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :stock_items, only: [:index, :create, :new, :edit, :update] do
     collection { post :upload }
     collection { post :csv_upload }
