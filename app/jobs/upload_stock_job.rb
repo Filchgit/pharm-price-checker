@@ -17,8 +17,5 @@ class UploadStockJob < ApplicationJob
       stock_item.price_reduction_rec_retail_at_scrape = price_reduction_rec_retail_at_scrape_set(row)
       stock_item.price_description = row[1]
       stock_item.save
-    end
   end
-
-
 end
