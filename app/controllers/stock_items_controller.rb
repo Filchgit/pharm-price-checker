@@ -38,6 +38,7 @@ class StockItemsController < ApplicationController
 
   def csv_upload
     authorize StockItem
+    
     StockItem.csv_upload(params[:file])
     redirect_to stock_items_path
   end

@@ -35,8 +35,10 @@
           Last Invoice Cost: $<%= matched_pharm_stock.last_invoice_cost.to_s.insert(-3,'.') %>
           <% end %> <br>
           Pharmacy pde <%= matched_pharm_stock.pde %> <br>
-          GST Flag: <%= matched_pharm_stock.gst_flag %>
-
+          GST Flag: <%= matched_pharm_stock.gst_flag %> <br>
+          <% if  matched_pharm_stock.cw_only == 'Y'%>
+          Last Bought from Chemist Warehouse
+          <% end %>
           <%= link_to   edit_pharmacy_stock_item_path(:id => matched_pharm_stock.id), class: "btn btn-info", method: :get do  %>
             Edit Pharmacy Item 
             <% end %>

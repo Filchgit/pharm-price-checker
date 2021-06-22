@@ -15,12 +15,6 @@ class PharmacyStockItem < ApplicationRecord
         pharmacy_item.last_invoice_cost = row [19].to_s.delete('.$').to_i
 
         pharmacy_item.save
-
-        # update_pharmacy_item.apn = row[16].to_i
-        # update_pharmacy_item.pde = row[17].to_i
-        # update_pharmacy_item.ws1_cost = row[18].to_s.delete('.$').to_i
-        # update_pharmacy_item.last_invoice_cost = row [19].to_s.delete('.$').to_i
-        # update_pharmacy_item.save
       end
     end
   end

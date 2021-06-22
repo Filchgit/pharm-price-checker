@@ -50,6 +50,6 @@ class PharmacyStockItemsController < ApplicationController
 
   def pharmacy_stock_item_params
     params.require(:pharmacy_stock_item).permit(:name, :pharmacy_id, :ws1_cost,
-                                                :last_invoice_cost, :pde, :apn, :gst_flag)
+                                                :last_invoice_cost, :pde, :apn, :gst_flag, :cw_only)
   end
 end

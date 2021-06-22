@@ -18,6 +18,6 @@ class SettingsController < ApplicationController
   end
 
   def setting_params
-    params.require(:setting).permit(:name, :percent_difference)
+    params.require(:setting).permit(:name, :percent_difference, :cw_price_difference)
   end
 end

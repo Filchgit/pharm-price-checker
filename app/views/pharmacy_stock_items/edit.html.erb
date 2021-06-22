@@ -9,6 +9,7 @@
     <br>
     <%= simple_form_for pharmacy_stock_item do |f| %>
     <%= f.input :gst_flag, collection: ['Y', 'N', 'F'], label: "Gst Flag"  %>
+    <%= f.input :cw_only, collection: ['Y', 'N'], label: "Last bought from Chemist Warehouse"  %>
     <%= f.input :ws1_cost, label: "wholesale cost in cents" %> 
     <%= f.input :last_invoice_cost , label: "last invoice cost in cents" %>
     <%= f.input :pde, label: "pde " %>
