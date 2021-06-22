@@ -2,6 +2,7 @@
 <p> At the moment this items will only appear on this page when they  
 <br/> a) are linked to a CW item via equal apns that are not 0 and 
 <br/> b) the price at scrape cost (ex gst if gst is applicable) is under the last invoice cost plus <%= @setting.percent_difference %>%
+<br/> c) if last bought at ChemistWarehouse the price is under the last invoice cost plus  <%= @setting.cw_price_difference %>%
 <br> You can change this percentage under settings percent difference, settings link a dropdown under your avatar
 <br>
 <br/> The matched items are ordered from the greatest retail price reduction down to the least</p>
@@ -13,9 +14,18 @@
   <% next if matched_pharm_stock == nil %>
   <% next if sitem.apn_barcode_1 == 0 || sitem.apn_barcode_1 == nil %>
   <% if matched_pharm_stock.gst_flag == 'Y' || matched_pharm_stock.gst_flag == nil %>
-     <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+    <% if matched_pharm_stock.cw_only == 'N' || matched_pharm_stock.cw_only == nil  %>  
+       <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+    <% else   %> 
+       <% next if sitem.price_at_scrape * 10/11 > matched_pharm_stock.last_invoice_cost * (@setting.cw_price_difference + 100)/100   %>
+    <% end %>
+
   <% elsif matched_pharm_stock.gst_flag == 'N' || matched_pharm_stock.gst_flag == 'F' %>
-     <% next if sitem.price_at_scrape  > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+    <% if matched_pharm_stock.cw_only == 'N' || matched_pharm_stock.cw_only == nil  %>  
+      <% next if sitem.price_at_scrape  > matched_pharm_stock.last_invoice_cost * (@setting.percent_difference + 100)/100   %>
+    <% else %>  
+      <% next if sitem.price_at_scrape  > matched_pharm_stock.last_invoice_cost * (@setting.cw_price_difference + 100)/100   %>
+    <% end %>
   <% end %>
  
   <% matched_stock_count = matched_stock_count +1 %>
