@@ -17,4 +17,8 @@ class SettingPolicy < ApplicationPolicy
     true if user.admin? || user.premium?
   end
 
+  def download?
+    true if user.admin? || user.premium?
+  end
+
 end

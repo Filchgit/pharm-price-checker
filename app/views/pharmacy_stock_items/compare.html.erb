@@ -7,6 +7,10 @@
 <br>
 <br/> The matched items are ordered from the greatest retail price reduction down to the least</p>
 <% matched_stock_count = 0 %>
+
+<br/> This button will download the apns on this page, plus unfortunately some extra fields at this stage, but easy enough to clean at your end
+ <%= link_to "APNS as file ", stock_apns_path, class: "btn btn-primary"  %>
+
 <% @stock_items =StockItem.all.sort_by &:price_reduction_rec_retail_at_scrape  %>
 <% @stock_items.reverse! %>
 <% @stock_items.each  do |sitem|%>
