@@ -5,7 +5,7 @@ class StockItem < ApplicationRecord
   def self.upload(file) 
     # upload is for uploading the scraped files via SQL / C#
     return if file.nil?
-
+  
     CSV.foreach(file.path) do |row|
       stock_item = StockItem.new
       if StockItem.find_by(name: row[0]).nil?

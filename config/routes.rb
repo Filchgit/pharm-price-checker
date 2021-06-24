@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   get 'stock_items/index'
   get 'stock_items/new'
   get 'stock_items/create'
+  get 'stock_apns', to: 'stock_apns#download'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
  
   root to: 'stock_items#index'
 
   # Sidekiq Web UI, only for admins.
-  require "sidekiq/web"
+  require 'sidekiq/web'
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end

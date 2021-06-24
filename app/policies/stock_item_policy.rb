@@ -35,4 +35,9 @@ class StockItemPolicy < ApplicationPolicy
     true if user.admin?
   end
 
+  def download?
+    true if user.admin? || user.premium?
+  end
+
+
 end

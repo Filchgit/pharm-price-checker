@@ -3,5 +3,6 @@
 
   <%= simple_form_for @setting do |f| %>
     <%= f.input :percent_difference, label: "Percentage Difference Range from last invoice cost"  %>
+    <%= f.input :cw_price_difference, label: "Percentage Difference Range from last invoice cost if last bought from Chemist Warehouse"  %>
     <%= f.submit %>
     <% end %> 
