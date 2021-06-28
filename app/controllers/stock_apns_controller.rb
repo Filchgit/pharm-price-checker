@@ -7,6 +7,7 @@ class StockApnsController < ApplicationController
     stock_items = StockItem.all
     @setting = Setting.first
     # ok so I know this is ugly , not dry and shouldn't be here but I am experimenting
+    # also experimenting with updating ruby versions so we will see how that goes
 
     matched_stocks = []
    
